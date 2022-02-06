@@ -1,0 +1,79 @@
+﻿@model PS11905_BAODUONG_ASM.Models.Khachhang
+
+@{
+    Layout = "~/Views/Shared/_WebLayout.cshtml";
+}
+
+<link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+<script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/js/bootstrap.min.js"></script>
+<script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
+<style>
+    h5, .h5 {
+        font-size: 18px;
+        color: gray;
+    }
+</style>
+<!------ Include the above in your HEAD tag ---------->
+
+<div class="container">
+    <div id="signupbox" style=" margin-top:50px" class="mainbox col-md-6 col-md-offset-3 col-sm-8 col-sm-offset-2">
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <div class="panel-title">
+                    <h4 style="text-align:center" class="text-danger">THÔNG TIN CÁ NHÂN</h4>
+                </div>
+                <div class="panel-body">
+                    <form asp-action="Info" method="post">
+                        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                        <input type="hidden" asp-for="KhachhangID" />
+                        <div class="form-group">
+                            <label asp-for="FullName" class="control-label"></label>
+                            <input asp-for="FullName" class="form-control" />
+                            <span asp-validation-for="FullName" class="text-danger"></span>
+                        </div>
+                        <div class="form-group">
+                            <label asp-for="Ngaysinh" class="control-label"></label>
+                            <input asp-for="Ngaysinh" class="form-control" />
+                            <span asp-validation-for="Ngaysinh" class="text-danger"></span>
+                        </div>
+                        <div class="form-group">
+                            <label asp-for="PhoneNumber" class="control-label"></label>
+                            <input asp-for="PhoneNumber" class="form-control" />
+                            <span asp-validation-for="PhoneNumber" class="text-danger"></span>
+                        </div>
+                        <div class="form-group">
+                            <label asp-for="Email" class="control-label"></label>
+                            <input readonly asp-for="Email" class="form-control" />
+                            <span asp-validation-for="Email" class="text-danger"></span>
+                        </div>
+                        <div class="form-group">
+                            <label asp-for="Password" class="control-label"></label>
+                            <input asp-for="Password" class="form-control" />
+                            <span asp-validation-for="Password" class="text-danger"></span>
+                        </div>
+                        <div class="form-group">
+                            <label asp-for="ConfirmPassword" class="control-label"></label>
+                            <input asp-for="ConfirmPassword" class="form-control" />
+                            <span asp-validation-for="ConfirmPassword" class="text-danger"></span>
+                        </div>
+                        <div class="form-group">
+                            <label asp-for="Mota" class="control-label"></label>
+                            <input asp-for="Mota" class="form-control" />
+                            <span asp-validation-for="Mota" class="text-danger"></span>
+                        </div>
+                        <div class="form-group">
+                            <input type="submit" value="Cập nhật" class="btn btn-primary" />
+                        </div>
+                        <div>
+                            <a asp-controller="Home" asp-action="Index"><h5>Quay về trang chủ</h5></a>
+                        </div>
+
+                        @section Scripts {
+                            @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+                        }
+                    </form>
+                </div>
+             </div>
+        </div>
+    </div>  
+</div>

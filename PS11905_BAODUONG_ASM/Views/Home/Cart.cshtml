@@ -1,0 +1,237 @@
+﻿@using PS11905_BAODUONG_ASM.Models
+@using Microsoft.AspNetCore.Http
+@using Microsoft.AspNetCore.Http.Extensions
+@using Microsoft.CodeAnalysis.Operations
+@using Microsoft.EntityFrameworkCore.Internal
+@using PS11905_BAODUONG_ASM.Constant
+
+@model IEnumerable<PS11905_BAODUONG_ASM.Models.ViewModels.ViewCart>;
+
+@{ string emailAdress = Context.Session.GetString(SessionKey.Khachhang.KH_Email);}
+@{ string fullName = Context.Session.GetString(SessionKey.Khachhang.KH_FullName);}
+
+@{
+    Layout = "~/Views/Shared/_WebLayout.cshtml";
+}
+
+@{
+    double subTotal = 0;
+}
+
+<section class="page-info new-block">
+    <div class="fixed-bg" style="background: url('~/images/info-bg.jpg');"></div>
+    <div class="overlay"></div>
+    <div class="container">
+        <h2>Domnoo menu</h2>
+        <div class="clear-fix"></div>
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="#">Home</a></li>
+            <li class="breadcrumb-item active"><a href="#">Menu</a></li>
+        </ol>
+    </div>
+</section><!-- banner -->
+
+<section class="shopping-cart new-block">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="table-responsive">
+                    <table class="table cart-tbl">
+                        <thead>
+                            <tr>
+                                <th class="p_dtl">Tên món ăn</th>
+                                <th class="p_btn"></th>
+                                <th class="p_price">Giá</th>
+                                <th class="p_quantity">Số lượng</th>
+                                <th class="p_ttl">Tổng tiền</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @if (Model.Any())
+                            {
+
+                                @foreach (var cart in Model)
+                                {
+                                    <tr id="tr_@cart.MonAn.MonAnID">
+                                        <td class="p_dtl">
+                                            <div class="block-stl9">
+                                                <div class="img-holder">
+                                                    <img src="~/images/monan/@cart.MonAn.HinhAnh" alt="" class="img-responsive">
+                                                </div>
+                                                <div class="info-block">
+                                                    <h5>@cart.MonAn.Name</h5>
+                                                    <p class="txt-cat">Regular</p>
+                                                    <p class="ab-txt-block">@cart.MonAn.MoTa</p>
+                                                </div>
+                                            </div>
+                                        </td>
+                                        <td class="p_btn">
+                                            <a href="javascript:updateCart(@cart.MonAn.MonAnID);" class="btn1 stl3">Cập nhật</a>
+                                            <a href="javascript:delCart(@cart.MonAn.MonAnID);" class="btn1 stl3">Xóa</a>
+                                        </td>
+                                        <td class="p_price" id="tdGia_@cart.MonAn.MonAnID">
+                                            <span id="spGia_@cart.MonAn.MonAnID" style="display:none">@cart.MonAn.Gia</span>
+                                            @cart.MonAn.Gia.ToString("#,###")
+                                        </td>
+                                        <td class="p_quantity">
+                                            <div class="quantity">
+                                                <input id="txtQuantity_@cart.MonAn.MonAnID" type="number" class="form-control text-center" value="@cart.Quantity" min="0">
+                                            </div>
+                                        </td>
+                                        <td class="p_ttl" id="tdTien_@cart.MonAn.MonAnID">
+                                            @{
+                                                double total = cart.Quantity * cart.MonAn.Gia;
+                                                subTotal += total;
+                                            }
+                                            @total.ToString("#,###")
+                                        </td>
+                                    </tr>
+                                }
+                            }
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="clearfix"></div>
+</section>
+
+<section class="loc-cop-sum  new-block">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-4 col-md-4 col-sm-6 col-xs-12">
+                @*<div class="block-stl10">
+                    <h3>Find your location :</h3>
+                    <p>Mauris nec semper justo, a accumsan est. Morbi massa libelementum.</p>
+                    <form action="#">
+                        <div class="form-group">
+                            <input type="text" class="form-control" placeholder="Search Location..">
+                        </div>
+                        <button class="btn btn5">Apply</button>
+                    </form>
+                </div>*@
+            </div>
+            <div class="col-lg-4 col-md-4 col-sm-6 col-xs-12">
+                @*<div class="block-stl10">
+                    <h3>discount coupons :</h3>
+                    <p>Mauris nec semper justo, a accumsan est. Morbi massa libelementum.</p>
+                    <form action="#">
+                        <div class="form-group">
+                            <input type="text" class="form-control" placeholder="code type here..">
+                        </div>
+                        <button class="btn btn5">Apply</button>
+                    </form>
+                </div>*@
+            </div>
+            <div class="col-lg-4 col-md-4 col-xs-12">
+                <div class="block-stl10 odr-summary">
+                    <h3>XÁC NHẬN ĐƠN HÀNG :</h3>
+                    <ul class="list-unstyled">
+                        <li>
+                            <span class="ttl">Tổng tiền</span> <span class="stts" id="spTotal">
+                                @subTotal.ToString("#,###")
+                            </span>
+                        </li>
+                        <li><span class="ttl">Phí vận chuyển</span> <span class="stts">Miễn phí</span></li>
+                    </ul>
+                    @*<div class="ttl-all">
+                <span class="ttlnm">Total</span>
+                <span class="odr-stts"id="spTotal">@subTotal</span>
+            </div>*@
+                </div>
+                @if (emailAdress != null && emailAdress != "")
+                {
+                    <a class="btn btn1 stl2" href="javascript:orderCart(true);">Đặt hàng</a>
+                    @*<button class="btn btn1 stl2">Đăng nhập</button>*@
+
+                }
+                else
+                {
+                    <a class="btn btn1 stl2" href="javascript:orderCart(false);">Đặt hàng</a>
+                    @*<button class="btn btn1 stl2">Đăng nhập - Đặt hàng</button>*@
+                    <br />
+                    <br />
+                    <span class="text-danger">Bạn cần đăng nhập để đặt hàng</span>
+                }
+
+            </div>
+        </div>
+    </div>
+</section>
+
+@section Scripts
+{
+    <script>
+        function delCart(id) {
+            $.ajax({
+                type: "POST",
+                url: "/Home/DeleteCart",
+                data: {
+                    id: id,
+                },
+                success: function (result) {
+                    $("#tr_" + id).hide();
+                    $("#spTotal").html(result);
+
+                    //alert(result);
+                    if (result == "0") {
+                        $("#imgCart").attr("src", '/images/cart.png');
+                    }
+                }
+            });
+        }
+
+        function updateCart(id) {
+            var soluong = $("#txtQuantity_" + id).val();
+            var gia = $("#spGia_" + id).html();
+            //alert(gia);
+            var thanhtien = soluong * gia;
+
+
+            $("#tdTien_" + id).html(formatCash(thanhtien.toString()));
+
+
+            $.ajax({
+                type: "POST",
+                url: "/Home/UpdateCart",
+                data: {
+                    id: id,
+                    soluong: soluong
+                },
+                success: function (result) {
+                    $("#spTotal").html(formatCash(result.toString()));
+
+                    if (result == "0") {
+                        $("#imgCart").attr("src", '/images/cart.png');
+                    }
+                }
+            });
+        }
+
+        function orderCart(flagLogin) {
+            if (!flagLogin) {
+                alert("Bạn cần đăng nhập để đặt hàng.");
+                return false;
+            }
+
+            $.ajax({
+                type: "POST",
+                url: "/Home/OrderCart",
+                data: {
+                },
+                success: function (result) {
+                    window.location = "/Home/History";
+                }
+            });
+        }
+
+        function formatCash(str) {
+            return str.split('').reverse().reduce((prev, next, index) => {
+                return ((index % 3) ? next : (next + ',')) + prev
+            })
+        }
+        console.log(formatCash('1234567890')) // 1,234,567,890
+
+    </script>
+}

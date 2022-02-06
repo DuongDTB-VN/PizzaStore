@@ -1,0 +1,276 @@
+﻿@using Microsoft.AspNetCore.Http
+@using Newtonsoft.Json
+@using PS11905_BAODUONG_ASM.Models.ViewModels
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Home | PizzaWeed</title>
+    <!-- Favicon -->
+    <link rel="shortcut icon" href="~/images/fav2.ico" type="image/x-icon">
+    <link rel="icon" href="~/images/fav2.ico" type="image/x-icon">
+    <!-- include the site stylesheet -->
+    <link rel="stylesheet" href="~/css/bootstrap.min.css">
+    <!-- main stylesheet -->
+    <link rel="stylesheet" href="~/css/style.css">
+    <!-- color stylesheet -->
+    <link rel="stylesheet" href="~/css/colors.css" id="ui-theme-color">
+    <!-- responsive css -->
+    <link rel="stylesheet" href="~/css/responsive.css">
+</head>
+<body>
+    <div class="loader_wrapper">
+        <div class="loader">
+            <img src="images/loader.gif" alt="" class="img-fluid">
+        </div>
+    </div>
+    <!--// loader_wrapper -->
+
+    <div id="wrapper">
+        <header class="new-block main-header">
+            <div class="main-nav new-block">
+                <div class="container-fluid">
+                    <div class="row">
+                        <div class="col-lg-12">
+                            <div class="logo">
+                                <a href="/home"><img src="~/images/logo3.png" alt="logo" class="img-responsive"></a>
+                            </div>
+                            <div class="location-block">
+                                <p>VIETNAM</p>
+                                <span>+8497 510 278</span>
+                            </div>
+                            <a href="#" class="nav-opener"><i class="fa fa-bars"></i></a>
+                            <nav class="nav">
+                                <ul class="list-unstyled">
+                                    <li class="drop active">
+                                        <a asp-action="Index"
+                                           asp-controller="Home">Trang chủ</a>
+                                        @*<ul class="drop-down">
+                                                <li><a href="index.html">Home1</a></li>
+                                                <li><a href="home2.html">Home2</a></li>
+                                            </ul>*@
+                                    </li>
+                                    @*<li class="drop">
+                                            <a href="#">Menu</a>
+                                            <ul class="drop-down">
+                                                <li><a href="menu.html">Menu</a></li>
+                                                <li><a href="menu2.html">Menu2</a></li>
+                                            </ul>
+                                        </li>*@
+                                    @*<li class="drop">
+                                            <a href="#">Pages</a>
+                                            <ul class="drop-down">
+                                                <li><a href="menu.html">Menu</a></li>
+                                                <li><a href="menu2.html">Menu2</a></li>
+                                                <li><a href="about_us.html">About</a></li>
+                                                <li><a href="blog.html">Blog</a></li>
+                                                <li><a href="blog_left.html">Blog left</a></li>
+                                                <li><a href="blog_right.html">Blog right</a></li>
+                                                <li><a href="blog_single.html">Single blog</a></li>
+                                                <li><a href="contact.html">Contact us</a></li>
+                                                <li><a href="product_single.html">Product single</a></li>
+                                                <li><a href="shopping_cart.html">Cart page</a></li>
+                                            </ul>
+                                        </li>*@
+                                    @*<li><a href="#">Meals</a></li>*@
+                                    <li><a href="#">Pizza</a></li>
+                                    <li><a href="about_us.html">About</a></li>
+                                    <li class="drop">
+                                        <a href="blog_left.html">Blog</a>
+                                        @*<ul class="drop-down">
+                                                <li><a href="blog.html">Blog</a></li>
+                                                <li><a href="blog_left.html">Blog left</a></li>
+                                                <li><a href="blog_right.html">Blog right</a></li>
+                                                <li><a href="blog_single.html">Single blog</a></li>
+                                            </ul>*@
+                                    </li>
+                                    <li>
+                                        <a asp-action="Search"
+                                           asp-controller="Home">Tìm kiếm</a>
+                                    </li>
+                                    <partial name="_WebLoginPartial" />
+                                </ul>
+                            </nav>
+                            <div class="nav-right-block">
+                                <ul class="list-unstyled">
+                                    @{
+                                        int cartCount = 0;
+                                        var cart = Context.Session.GetString("cart");
+                                        if (cart != null)
+                                        {
+                                            cartCount = JsonConvert.DeserializeObject<List<ViewCart>>(cart).Count;
+                                        }
+
+                                    }
+                                    <li>
+                                        <a asp-action="Cart"
+                                           asp-controller="Home"><i class="flaticon-scooter-front-view"></i><span>Cart (@cartCount)</span></a>
+                                    </li>
+                                </ul>
+                            </div><!-- nav-login -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </header> <!-- header -->
+
+        @RenderBody()
+
+        <footer class="main-footer new-block">
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-3 col-md-3 col-sm-12 col-xs-12">
+                        <div class="footer-head">
+                            <h3>Giới thiệu PizzaWeed</h3>
+                        </div>
+                        <div class="footer-content">
+                            <p>PizzaWeed là chuỗi cửa hàng Pizza lớn nhất Việt Nam. Mong muốn đem đến cho khách hàng chiếc bánh Pizza chuẩn vị Ý nhất. Hãy trải nghiệm ngay nhé !</p>
+                            <a href="#" class="link">Đọc thêm</a>
+                            <ul class="list-unstyled card-block">
+                                <li><a href="#"><img src="~/images/crt1.png" alt=""></a></li>
+                                <li><a href="#"><img src="~/images/crt2.png" alt=""></a></li>
+                                <li><a href="#"><img src="~/images/crt3.png" alt=""></a></li>
+                                <li><a href="#"><img src="~/images/crt4.png" alt=""></a></li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="col-lg-3 col-md-3 col-sm-4 col-xs-12">
+                        <div class="our-company">
+                            <div class="footer-head">
+                                <h3>Thực đơn</h3>
+                            </div>
+                            <div class="footer-content">
+                                <ul class="list-unstyled">
+                                    <li><a href="#">Tất cả sản phẩm</a></li>
+                                    <li><a href="#">Món</a></li>
+                                    <li><a href="#">Combo</a></li>
+                                    <li><a href="#">Nước uống</a></li>
+                                    <li><a href="#">Pizza đặc biệt</a></li>
+
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-2 col-md-2 col-sm-4 col-xs-12">
+                        <div class="footer-head">
+                            <h3>Các mục</h3>
+                        </div>
+                        <div class="footer-content">
+                            <ul class="list-unstyled">
+                                <li><a href="#">Trang chủ</a></li>
+                                <li><a href="#">Menu</a></li>
+                                <li><a href="#">Blog</a></li>
+                                <li><a href="#">Đăng ký</a></li>
+                                <li><a href="#">Đăng nhập</a></li>
+                                <li><a href="/Admin/Login">Admin Login</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
+                        <div class="flickr">
+                            <div class="footer-head">
+                                <h3>Hình ảnh trải nghiệm :</h3>
+                            </div>
+                            <div class="footer-content">
+                                <ul class="list-unstyled">
+                                    <li><a href="#"><img src="~/images/Layer-12.jpg" alt="" class="img-responsive"></a></li>
+                                    <li><a href="#"><img src="~/images/Layer-13.jpg" alt="" class="img-responsive"></a></li>
+                                    <li><a href="#"><img src="~/images/Layer-14.jpg" alt="" class="img-responsive"></a></li>
+                                    <li><a href="#"><img src="~/images/Layer-15.jpg" alt="" class="img-responsive"></a></li>
+                                    <li><a href="#"><img src="~/images/Layer-16.png" alt="" class="img-responsive"></a></li>
+                                    <li><a href="#"><img src="~/images/Layer-17.jpg" alt="" class="img-responsive"></a></li>
+                                    <li><a href="#"><img src="~/images/Layer-18.jpg" alt="" class="img-responsive"></a></li>
+                                    <li><a href="#"><img src="~/images/Layer-19.jpg" alt="" class="img-responsive"></a></li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </footer>
+
+        <div class="copy-right">
+            <div class="container">
+                <p><a target="_blank" href="https://www.templateshub.net">Liên hệ với PizzaWeed</a></p>
+                <ul class="social-nav">
+                    <li><a href="#"><i class="flaticon-facebook-logo"></i></a></li>
+                    <li><a href="#"><i class="flaticon-twitter"></i></a></li>
+                    <li><a href="#"><i class="flaticon-google-plus-logo"></i></a></li>
+                    <li><a href="#"><i class="flaticon-dribbble-logo"></i></a></li>
+                    <li><a href="#"><i class="flaticon-behance"></i></a></li>
+                </ul>
+            </div>
+        </div>
+
+
+        <span id="go_to_top" class="go-to-top"><i class="flaticon-up-arrow"></i></span>
+
+        <div class="theme-menu hide-sidebar">
+            <h2>Choose your color</h2>
+            <div id="style-switcher">
+                <ul class="colors theme-btn">
+                    <li data-path="~/css/colors.css" data-url="images">
+                        <p class="btn clr-style" style="background:#c10a28;"></p>
+                    </li>
+                    <li data-path="~/css/colors2.css" data-url="images/clr2">
+                        <p class="btn clr-style" style="background:#f1b601;"></p>
+                    </li>
+                    <li data-path="~/css/colors3.css" data-url="images/clr3">
+                        <p class="btn clr-style" style="background:#0a84c1;"></p>
+                    </li>
+                    <li data-path="~/css/colors4.css" data-url="images/clr4">
+                        <p class="btn clr-style" style="background:#02a8aa;"></p>
+                    </li>
+                    <li data-path="~/css/colors5.css" data-url="images/clr5">
+                        <p class="btn clr-style" style="background:#db780d;"></p>
+                    </li>
+                    <li data-path="~/css/colors6.css" data-url="images/clr6">
+                        <p class="btn clr-style" style="background:#e54c04;"></p>
+                    </li>
+                </ul>
+            </div>
+            <button class="btn btn-clr"><i class="fas fa-paint-brush"></i></button>
+        </div>
+    </div><!-- #wrapper -->
+    <!-- include jQuery -->
+    <script src="~/js/jquery.min.js"></script>
+    <!-- bootstrap -->
+    <script src="~/js/bootstrap.min.html"></script>
+    <!-- bootstrap -->
+    <script src="~/js/owl.carousel.min.js"></script>
+    <!-- slick slider  -->
+    <script src="~/js/slick.js"></script>
+    <!-- dscountdown  -->
+    <script src="~/js/dscountdown.min.js"></script>
+    <!-- jquery.nice-select -->
+    <script src="~/js/jquery.nice-select.js"></script>
+    <!-- magnific-popup -->
+    <script src="~/js/jquery.magnific-popup.min.js"></script>
+    <!-- Mixitup -->
+    <script src="~/js/mixitup.min.js"></script>
+    <!-- Google Map -->
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBP1lPhUhDU6MINpruPDinAzXffRlpzzFo"></script>
+    <script src="~/js/map.js"></script>
+    <!-- custom js -->
+    <script src="~/js/custom.js"></script>
+
+
+    @RenderSection("Scripts", false)
+
+
+    <script>
+    // Code Logout
+
+        function Logout() {
+            $.ajax({
+                type: "POST",
+                url: "/Home/Logout",
+                success: function (result) {
+                    location.href = "/Home";
+                }
+            });
+        }
+    </script>
+</body>
+</html>

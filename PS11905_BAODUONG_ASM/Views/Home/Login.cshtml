@@ -1,0 +1,83 @@
+﻿@model PS11905_BAODUONG_ASM.Models.ViewModels.ViewWebLogin
+@{
+    Layout = "~/Views/Shared/_WebLayout.cshtml";
+}
+
+
+
+
+
+    <link href="https://fonts.googleapis.com/css?family=Lato:300,400,700&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+
+    <link rel="stylesheet" href="~/css/style12.css">
+
+<body>
+    <section class="ftco-section">
+        <div class="container">
+            <div class="row justify-content-center">
+                <div class="col-md-6 text-center mb-5">
+                    @*<h2 class="heading-section">Login #04</h2>*@
+                </div>
+            </div>
+            <div class="row justify-content-center">
+                <div class="col-md-12 col-lg-10">
+                    <div class="wrap d-md-flex">
+                        <div class="img" style="background-image: url(/images/bg-1.jpg);">
+                        </div>
+                        <div class="login-wrap p-4 p-md-5">
+                            <div class="d-flex">
+                                <div class="w-100">
+                                    <h3 class="mb-4">Đăng nhập</h3>
+                                </div>
+                                <div class="w-100">
+                                    <p class="social-media d-flex justify-content-end">
+                                        <a href="#" class="social-icon d-flex align-items-center justify-content-center"><span class="fa fa-facebook"></span></a>
+                                        <a href="#" class="social-icon d-flex align-items-center justify-content-center"><span class="fa fa-twitter"></span></a>
+                                    </p>
+                                </div>
+                            </div>
+                            <div class="text-danger" asp-validation-summary="All"></div>
+                            <form asp-action="Login" method="post" class="signin-form">
+                                <input type="hidden" asp-for="ReturnUrl" />
+                                <div class="form-group mb-3">
+                                    <label class="label" for="name" >Email đăng nhập</label>
+                                    <input type="text" asp-for="Email" class="form-control" placeholder="Email của bạn" required>
+                                </div>
+                                <div class="form-group mb-3">
+                                    <label class="label" for="password">Mật khẩu</label>
+                                    <input type="password" asp-for="Password" class="form-control" placeholder="Mật khẩu" required>
+                                </div>
+                                <div class="form-group">
+                                    <button type="submit" class="form-control btn btn-danger rounded submit px-3">Đăng nhập</button>
+                                </div>
+                                <div class="form-group d-md-flex">
+                                    <div class="w-50 text-left">
+                                        <label class="checkbox-wrap checkbox-primary mb-0">
+                                            Lưu đăng nhập
+                                            <input type="checkbox" checked>
+                                            <span class="checkmark"></span>
+                                        </label>
+                                    </div>
+                                    <div class="w-50 text-md-right">
+                                        <a href="#">Quên mật khẩu</a>
+                                    </div>
+                                </div>
+                            </form>
+                            <p class="text-center">Bạn chưa có tài khoản? <a data-toggle="tab" href="#signup">Đăng kí</a></p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <script src="js/jquery.min.js"></script>
+    <script src="js/popper.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+    <script src="js/main.js"></script>
+
+</body>
+
+

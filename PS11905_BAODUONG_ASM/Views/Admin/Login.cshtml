@@ -1,0 +1,56 @@
+﻿@model PS11905_BAODUONG_ASM.Models.ViewModels.ViewLogin;
+
+    @*<h1 class="bg-info text-white">Login</h1>
+    <div class="text-danger" asp-validation-summary="All"></div>
+    <div class="row">
+        <div class="col-md-4">
+            <form asp-action="Login" method="post">
+                <input type="hidden" asp-for="ReturnUrl" />
+                <div class="form-group">
+                    <label asp-for="UserName"></label>
+                    <input asp-for="UserName" class="form-control" />
+                </div>
+                <div class="form-group">
+                    <label asp-for="Password"></label>
+                    <input asp-for="Password" class="form-control" />
+                </div>
+                <button class="btn btn-primary" type="submit">Log In</button>
+            </form>
+        </div>
+    </div>*@
+
+<link href="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+<script src="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
+<script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
+<link rel="stylesheet" href="~/css/login.css">
+
+<!------ Include the above in your HEAD tag ---------->
+
+<div class="wrapper fadeInDown">
+    <div id="formContent">
+        <!-- Tabs Titles -->
+        <!-- Icon -->
+        <div class="fadeIn first">
+            <img src="/images/banneradmin.png" id="icon" alt="User Icon" />
+            <h1>PizzaWeed - Admin</h1>
+        </div>
+        <div class="text-danger" asp-validation-summary="All"></div>
+
+
+        <!-- Login Form -->
+        <form asp-action="Login" method="post">
+            <input type="hidden" asp-for="ReturnUrl" />
+            <input type="text" id="login" asp-for="UserName" class="form-control fadeIn second"  placeholder="Tài khoản">
+            <input type="password" id="password" asp-for="Password" class="form-control fadeIn third" placeholder="Mật khẩu">
+            @*<input type="text" id="login" class="fadeIn second" name="login" placeholder="username">
+            <input type="password" id="password" class="fadeIn third" name="login" placeholder="password">*@
+            <input type="submit" class="fadeIn fourth" value="Đăng nhập">
+        </form>
+
+        <!-- Remind Passowrd -->
+        <div id="formFooter">
+            <a class="underlineHover" href="#">Go to the Site</a>
+        </div>
+
+    </div>
+</div>

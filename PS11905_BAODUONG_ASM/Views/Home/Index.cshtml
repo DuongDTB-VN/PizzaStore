@@ -1,0 +1,323 @@
+﻿
+@{
+    Layout = "~/Views/Shared/_WebLayout.cshtml";
+}
+
+@model List<MonAn>
+
+<div class="banner slider1 new-block">
+    <div class="fixed-bg" style="background: url('images/slider-bg1.jpg');"></div>
+    <div class="slider owl-carousel owl-theme">
+        <div class="item">
+            <div class="slider-block slide1 new-block">
+                <div class="container-fluid">
+                    <div class="row">
+                        <div class="col-lg-6 col-md-6 col-sm-6">
+                            <div class="text-block">
+                                <div class="img-block ab1" data-animation-in="bounceInDown" data-animation-out="animate-out fadeOutRight">
+                                    <img src="images/pizza.png" alt="" class="img-responsive">
+                                </div>
+                                <h1 class="text-stl1" data-animation-in="lightSpeedIn" data-animation-out="animate-out fadeOutRight">buy get one free</h1>
+                                <div class="number-block" data-animation-in="fadeInUp" data-animation-out="animate-out fadeOutRight">
+                                    <p class="text-stl2">Chốt đơn an toàn, khuyến mãi 50% mùa Covid</p>
+                                    <h2 class="text-stl3">1900 2728</h2>
+                                    <div class="text-center">
+                                        <a href="#" class="btn1 stl2">Chi tiết</a>
+                                        <a href="#" class="btn1 stl1">Thêm vào giỏ hàng</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-6 col-md-6 col-sm-6">
+                            <div class="img-block img2">
+                                <div class="img-holder" data-animation-in="fadeInDown" data-animation-out="animate-out fadeOutRight">
+                                    <img src="images/pz.png" alt="" class="img-responsive">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div><!-- .slider-block -->
+        </div>
+        <div class="item">
+            <div class="slider-block slide1 new-block">
+                <div class="container-fluid">
+                    <div class="row">
+                        <div class="col-lg-6 col-md-6 col-sm-6">
+                            <div class="text-block">
+                                <div class="img-block ab1" data-animation-in="bounceInDown" data-animation-out="animate-out fadeOutRight">
+                                    <img src="images/pizza.png" alt="" class="img-responsive">
+                                </div>
+                                <h1 class="text-stl1" data-animation-in="lightSpeedIn" data-animation-out="animate-out fadeOutRight">buy get one free</h1>
+                                <div class="number-block" data-animation-in="fadeInUp" data-animation-out="animate-out fadeOutRight">
+                                    <p class="text-stl2">GIẢM 70% CHO PIZZA THỨ 2 - CHỈ ÁP DỤNG CHO GIAO HÀNG</p>
+                                    <h2 class="text-stl3">1900 2728</h2>
+                                    <div class="text-center">
+                                        <a href="#" class="btn1 stl2">Chi tiết</a>
+                                        <a href="#" class="btn1 stl1">Thêm vào giỏ hàng</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-6 col-md-6 col-sm-6">
+                            <div class="img-block img2">
+                                <div class="img-holder" data-animation-in="fadeInDown" data-animation-out="animate-out fadeOutRight">
+                                    <img src="images/sldr.png" alt="" class="img-responsive">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div><!-- .slider-block -->
+        </div>
+    </div>
+</div><!-- banner -->
+
+<section class="special-offers-sec new-block">
+    <div class="special-offer-inr-block new-block">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="title">
+                        <p class="top-h">thuc don hom nay</p>
+                        <h2>ƯU ĐÃI MÙA LỄ HỘI</h2>
+                        <div class="btm-style"><span><img src="images/btm-style.png" alt="" class="img-responsive"></span></div>
+                    </div>
+                </div>
+                <div class="col-lg-12 pd0">
+                    <div class="special-offer-block ol_flr new-block">
+                        <div class="ol_flr">
+                            <div class="nav btn-filter-wrap">
+                                <button id="js-filter-0"
+                                        class="filterer btn">
+                                    <span>Tất cả</span>
+                                </button>
+                                <button id="js-filter-1" class="filterer btn"><span>Món</span></button>
+                                <button id="js-filter-2" class="filterer btn"><span>Combo</span></button>
+                                <button id="js-filter-3" class="filterer btn"><span>Nước</span></button>
+                            </div>
+                            <div class="clearfix"></div>
+                            <div class="slider-flr" id="filter_itm1">
+
+                                @if (Model.Count > 0)
+                                {
+                                    foreach (var food in Model)
+                                    {
+                                        if (food.TrangThai == true)
+                                        {
+                                            <div class="js-filter-chicken">
+                                                <div class="block-stl2">
+                                                    <div class="img-holder">
+                                                        <img src="~/images/monan/@food.HinhAnh" alt="" class="img-responsive">
+                                                    </div>
+                                                    <div class="text-block">
+                                                        <h3>@food.Name</h3>
+                                                        <p class="sz">Size : Regular</p>
+                                                        <p class="price"><span>@food.Gia.ToString("#,###")</span></p>
+                                                    </div>
+                                                    <div class="btn-sec">
+                                                        <a asp-controller="Home"
+                                                           asp-action="Details"
+                                                           asp-route-id="@food.MonAnID"
+                                                           class="btn4">Chi tiết</a>
+                                                        <a class="btn1 stl2" href="javascript:addCart(@food.MonAnID);">
+                                                            Thêm vào giỏ hàng <img id="imgBusy_@food.MonAnID" src="/images/busy.gif" style="display:none" />
+                                                        </a>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            @if (food.Phanloai == PhanLoai.Monan)
+                                            {
+                                                <div class="js-filter-meats">
+                                                    <div class="block-stl2">
+                                                        <div class="img-holder">
+                                                            <img src="~/images/monan/@food.HinhAnh" alt="" class="img-responsive">
+                                                        </div>
+                                                        <div class="text-block">
+                                                            <h3>@food.Name</h3>
+                                                            <p class="sz">Size : Regular</p>
+                                                            <p class="price"><span>@food.Gia.ToString("#,###")</span></p>
+                                                        </div>
+                                                        <div class="btn-sec">
+                                                            <a asp-controller="Home"
+                                                               asp-action="Details"
+                                                               asp-route-id="@food.MonAnID" class="btn4">Chi tiết</a>
+                                                            @*<a href="shopping_cart.html" class="btn1 stl2">Thêm vào giỏ hàng</a>*@
+                                                            <a class="btn1 stl2" href="javascript:addCart(@food.MonAnID);">
+                                                                Thêm vào giỏ hàng <img id="imgBusy_@food.MonAnID" src="/images/busy.gif" style="display:none" />
+                                                            </a>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            }
+                                            else if (food.Phanloai == PhanLoai.Combo)
+                                            {
+                                                <div class="js-filter-populars">
+                                                    <div class="block-stl2">
+                                                        <div class="img-holder">
+                                                            <img src="~/images/monan/@food.HinhAnh" alt="" class="img-responsive">
+                                                        </div>
+                                                        <div class="text-block">
+                                                            <h3>@food.Name</h3>
+                                                            <p class="sz">Size : Regular</p>
+                                                            <p class="price"><span>@food.Gia.ToString("#,###")</span></p>
+                                                        </div>
+                                                        <div class="btn-sec">
+                                                            <a asp-controller="Home"
+                                                               asp-action="Details"
+                                                               asp-route-id="@food.MonAnID" class="btn4">Chi tiết</a>
+                                                            @*<a href="shopping_cart.html" class="btn1 stl2">Thêm vào giỏ hàng</a>*@
+                                                            <a class="btn1 stl2" href="javascript:addCart(@food.MonAnID);">
+                                                                Thêm vào giỏ hàng <img id="imgBusy_@food.MonAnID" src="/images/busy.gif" style="display:none" />
+                                                            </a>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            }
+                                            else if (food.Phanloai == PhanLoai.Nuoc)
+                                            {
+                                                <div class="js-filter-veggie">
+                                                    <div class="block-stl2">
+                                                        <div class="img-holder">
+                                                            <img src="~/images/monan/@food.HinhAnh" alt="" class="img-responsive">
+                                                        </div>
+                                                        <div class="text-block">
+                                                            <h3>@food.Name</h3>
+                                                            <p class="sz">Size : Regular</p>
+                                                            <p class="price"><span>@food.Gia.ToString("#,###")</span></p>
+                                                        </div>
+                                                        <div class="btn-sec">
+                                                            <a asp-controller="Home"
+                                                               asp-action="Details"
+                                                               asp-route-id="@food.MonAnID" class="btn4">Chi tiết</a>
+                                                            @*<a href="shopping_cart.html" class="btn1 stl2">Thêm vào giỏ hàng</a>*@
+                                                            <a class="btn1 stl2" href="javascript:addCart(@food.MonAnID);">
+                                                                Thêm vào giỏ hàng <img id="imgBusy_@food.MonAnID" src="/images/busy.gif" style="display:none" />
+                                                            </a>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            }
+                                        }
+                                        else
+                                        {
+                                            //Phan nay khong hien nhung mon an ngung phuc vu
+                                        }
+
+                                    }
+                                }
+                            </div>
+                            <div class="clearfix"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="this-month-blog new-block">
+    <div class="container-fluid no-gutter">
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="title">
+                    <p class="top-h">Chia se trai nghiem</p>
+                    <h2>Pizza Weed</h2>
+                    <div class="btm-style"><span><img src="images/btm-style.png" alt="" class="img-responsive"></span></div>
+                </div>
+            </div>
+            <div class="col-lg-12">
+                <div class="blog-slider1 owl-theme owl-carousel">
+                    <div class="item">
+                        <div class="blog-stl1">
+                            <div class="img-holder">
+                                <img src="images/boy.jpg" alt="" class="img-responsive" />
+                                <div class="ovrl-block">
+                                    <h3>Pizza được biết đến là một nét đặc trong độc đáo trong ẩm thực Ý. Bên cạnh đó, nó đã trở thành món ăn rất được yêu thích và phổ biến trên toàn thế giới. </h3>
+                                    <a href="blog_single.html" class="btn1 stl2">read more</a>
+                                </div>
+                                <ul class="blog-info-nav">
+                                    <li><a href="#"><i class="flaticon-profile"></i>Tân Lộc</a></li>
+                                    <li><a href="#"><i class="flaticon-chat"></i>245 Coments</a></li>
+                                    <li><a href="#"><i class="flaticon-calendar"></i>13/06/2021</a></li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="item">
+                        <div class="blog-stl1">
+                            <div class="img-holder">
+                                <img src="images/girl.jpg" alt="" class="img-responsive" />
+                                <div class="ovrl-block">
+                                    <h3>Tôi thật sự hài lòng về PizzaWeed. Nơi đáng để trải nghiệm một chiếc bánh Pizza chuẩn bị Ý.</h3>
+                                    <a href="blog_single.html" class="btn1 stl2">read more</a>
+                                </div>
+                                <ul class="blog-info-nav">
+                                    <li><a href="#"><i class="flaticon-profile"></i>Ngọc Thắng</a></li>
+                                    <li><a href="#"><i class="flaticon-chat"></i>245 Coments</a></li>
+                                    <li><a href="#"><i class="flaticon-calendar"></i>05/02/2021</a></li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="item">
+                        <div class="blog-stl1">
+                            <div class="img-holder">
+                                <img src="images/girl1.jpg" alt="" class="img-responsive" />
+                                <div class="ovrl-block">
+                                    <h3>Pizza thật sự tuyệt vời, tôi muốn ăn nó mỗi ngày</h3>
+                                    <a href="blog_single.html" class="btn1 stl2">read more</a>
+                                </div>
+                                <ul class="blog-info-nav">
+                                    <li><a href="#"><i class="flaticon-profile"></i>Thanh Hoàng</a></li>
+                                    <li><a href="#"><i class="flaticon-chat"></i>245 Coments</a></li>
+                                    <li><a href="#"><i class="flaticon-calendar"></i>15/07/2020</a></li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="item">
+                        <div class="blog-stl1">
+                            <div class="img-holder">
+                                <img src="images/girl2.jpg" alt="" class="img-responsive" />
+                                <div class="ovrl-block">
+                                    <h3>Tận Hưởng Những Chiếc Bánh Pizza Thơm Ngon Với Đặc Trưng Riêng.</h3>
+                                    <a href="blog_single.html" class="btn1 stl2">read more</a>
+                                </div>
+                                <ul class="blog-info-nav">
+                                    <li><a href="#"><i class="flaticon-profile"></i>Văn Đức</a></li>
+                                    <li><a href="#"><i class="flaticon-chat"></i>245 Coments</a></li>
+                                    <li><a href="#"><i class="flaticon-calendar"></i>09/04/2020</a></li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+@section Scripts{
+    <script>
+        function addCart(id) {
+            $("#imgCart").attr("src", '/images/CartA.png');
+            $("#imgBusy_" + id).show();
+            setTimeout(function () {
+                $.ajax({
+                    url: "/Home/AddCart?Id=" + id,
+                    type: "POST",
+                    success: function (result) {
+                        //alert(result);
+                    },
+                    error: function (e) {
+                        alert(this.url);
+                    }
+                });
+                $("#imgBusy_" + id).hide();
+            },
+                500);
+        }
+    </script>
+}

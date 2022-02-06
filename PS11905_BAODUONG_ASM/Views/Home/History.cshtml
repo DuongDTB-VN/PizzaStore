@@ -1,0 +1,119 @@
+﻿@model IEnumerable<PS11905_BAODUONG_ASM.Models.Donhang>
+@{
+    // ViewData["Title"] = "History";
+
+    Layout = "~/Views/Shared/_WebLayout.cshtml";
+    //Layout = null;
+}
+
+<!doctype html>
+<html lang="vi">
+<head>
+    <title>Đơn hàng của bạn</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <link href='https://fonts.googleapis.com/css?family=Roboto:400,100,300,700' rel='stylesheet' type='text/css'>
+
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+
+    <link rel="stylesheet" href="/css/table1.css">
+
+</head>
+<body>
+    
+    <section class="ftco-section">
+        <div class="container">
+            <div class="row justify-content-center">
+                <div class="col-md-6 text-center mb-5 my-4">
+                    <h2 class="heading-section">ĐƠN HÀNG CỦA BẠN</h2>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="table-wrap">
+                        <table class="table">
+                            <thead class="thead-primary">
+                                <tr>
+                                    @*<th>#</th>
+                                        <th>First Name</th>
+                                        <th>Last Name</th>
+                                        <th>Email Address</th>*@
+                                    <th>
+                                        @Html.DisplayNameFor(model => model.Ngaydat)
+                                    </th>
+                                    <th>
+                                        @Html.DisplayNameFor(model => model.DiaChi)
+                                    </th>
+                                    <th>
+                                        @Html.DisplayNameFor(model => model.Tongtien)
+                                    </th>
+                                    <th>
+                                        @Html.DisplayNameFor(model => model.Trangthai)
+                                    </th>
+                                    <th>
+                                        @Html.DisplayNameFor(model => model.Ghichu)
+                                    </th>
+                                    <th>
+                                        Tùy chỉnh
+                                    </th>
+                                    @*<th>
+                                            @Html.DisplayNameFor(model => model.Khachhang)
+                                        </th>*@
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @if (Model != null)
+                                {
+                                    @foreach (var item in Model)
+                                    {
+                                        <tr>
+                                            <td>
+                                                @Html.DisplayFor(modelItem => item.Ngaydat)
+                                            </td>
+                                            <td>
+                                                @Html.DisplayFor(modelItem => item.DiaChi)
+                                            </td>
+                                            <td>
+                                                @Html.DisplayFor(modelItem => item.Tongtien)
+                                            </td>
+                                            <td>
+                                                @Html.DisplayFor(modelItem => item.Trangthai)
+                                            </td>
+                                            <td>
+                                                @Html.DisplayFor(modelItem => item.Ghichu)
+                                            </td>
+
+
+                                            @*<td>
+                                                    @Html.DisplayFor(modelItem => item.Khachhang.ConfirmPassword)
+                                                </td>*@
+                                            <td>
+                                                @*<a asp-action="Edit" asp-route-id="@item.DonhangID">Edit</a> |*@
+                                                <a asp-action="HistoryDetail"
+                                                   asp-route-id="@item.DonhangID">Xem chi tiết</a>
+                                            </td>
+                                        </tr>
+                                    }}
+                            </tbody>
+                        </table>
+
+                       
+                        <div>
+                            @*<a asp-action="Delete" asp-route-id="@item.DonhangID">Delete</a>*@
+                            <a asp-action="Index">Trở về trang chủ</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <script src="/js/jquery.min.js"></script>
+    <script src="/js/popper.js"></script>
+    <script src="/js/bootstrap.min.js"></script>
+    <script src="/js/main.js"></script>
+
+</body>
+</html>
+

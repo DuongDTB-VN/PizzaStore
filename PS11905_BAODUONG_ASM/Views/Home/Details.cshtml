@@ -1,0 +1,125 @@
+﻿@{
+    Layout = "~/Views/Shared/_WebLayout.cshtml";
+}
+
+@model MonAn
+
+<section class="page-info new-block">
+    <div class="fixed-bg" style="background: url('images/info-bg.jpg');"></div>
+    <div class="overlay"></div>
+    <div class="container">
+        <h2>Pizza menu</h2>
+        <div class="clear-fix"></div>
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="#">Home</a></li>
+            <li class="breadcrumb-item active"><a href="#">Menu</a></li>
+        </ol>
+    </div>
+</section><!-- banner -->
+
+
+@if (Model != null)
+{
+    <section class="about-product new-block">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-6 col-md-6">
+                    <div class="img-holder">
+                        <img src="~/images/monan/@Model.HinhAnh" alt="" class="img-responsive">
+                    </div>
+                </div>
+                <div class="col-lg-6 col-md-6">
+                    <div class="block-stl6">
+                        <h2>@Model.Name <span class="veg veg-nonveg"></span></h2>
+                        <p class="price"><span>@Model.Gia</span> </p>
+                        <p class="rating-star"><i class="fa fa-star"></i> <i class="fa fa-star"></i> <i class="fa fa-star"></i> <i class="far fa-star"></i> <i class="far fa-star"></i> <span>( 245 Ratings & 355 Reviews )</span> </p>
+                        <p class="ab-txt">@Model.MoTa</p>
+                        <form action="#">
+                            <div class="form-block">
+                                <div class="row">
+                                    <div class="col-lg-6 col-md-6 col-sm-6">
+                                        <div class="form-group">
+                                            <label>Size :</label>
+                                            <select class="c_select">
+                                                <option value="">Large</option>
+                                                <option value="">Medium</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-6 col-md-6 col-sm-6">
+                                        <div class="form-group">
+                                            <label>Add toppings :</label>
+                                            <select class="c_select">
+                                                <option value="">Veggies</option>
+                                                <option value="">Medium</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-6 col-md-6 col-sm-6">
+                                        <div class="form-group">
+                                            <label>Crust :</label>
+                                            <select class="c_select">
+                                                <option value="">Pan</option>
+                                                <option value="">Medium</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-6 col-md-6 col-sm-6">
+                                        <div class="form-group">
+                                            <label>Qty :</label>
+                                            <select class="c_select">
+                                                <option value="">01</option>
+                                                <option value="">02</option>
+                                                <option value="">03</option>
+                                                <option value="">04</option>
+                                                <option value="">05</option>
+                                                <option value="">06</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-6 col-md-6 col-sm-6">
+                                        <div class="form-group btn-block">
+                                            <a href="#" class="btn1 stl2">buy now</a>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-6 col-md-6 col-sm-6">
+                                        <div class="form-group btn-block">
+                                            <a class="btn1 stl1" href="javascript:addCart(@Model.MonAnID);">
+                                                Add Order <img id="imgBusy_@Model.MonAnID" src="/images/busy.gif" style="display:none" />
+                                            </a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="clearfix"></div>
+    </section>
+}
+
+@section Scripts{
+    <script>
+        function addCart(id) {
+            $("#imgCart").attr("src", '/images/CartA.png');
+            $("#imgBusy_" + id).show();
+            setTimeout(function () {
+                $.ajax({
+                    url: "/Home/AddCart?Id=" + id,
+                    type: "POST",
+                    success: function (result) {
+                        //alert(result);
+                    },
+                    error: function (e) {
+                        alert(this.url);
+                    }
+                });
+                $("#imgBusy_" + id).hide();
+            },
+                500);
+        }
+    </script>
+}

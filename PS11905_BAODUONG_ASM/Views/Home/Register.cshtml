@@ -1,0 +1,140 @@
+﻿@model PS11905_BAODUONG_ASM.Models.Khachhang
+@{
+    Layout = null;
+    //Layout = "~/Views/Shared/_WebLayout.cshtml";
+
+}
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    @*Required meta tags*@
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="Colorlib Templates">
+    <meta name="author" content="Colorlib">
+    <meta name="keywords" content="Colorlib Templates">
+    <title>Đăng ký | PizzaWeed</title>
+
+    <!-- Title Page-->
+    <!--<title>Au Register Forms by Colorlib</title>-->
+    <!-- Icons font CSS-->
+    <link href="~/vendor/mdi-font/css/material-design-iconic-font.min.css" rel="stylesheet" media="all">
+    <link href="~/vendor/font-awesome-4.7/css/font-awesome.min.css" rel="stylesheet" media="all">
+    <!-- Font special for pages-->
+    <link href="https://fonts.googleapis.com/css?family=Roboto:100,100i,300,300i,400,400i,500,500i,700,700i,900,900i" rel="stylesheet">
+
+    <!-- Vendor CSS-->
+    <link href="~/vendor/select2/select2.min.css" rel="stylesheet" media="all">
+    <link href="~/vendor/datepicker/daterangepicker.css" rel="stylesheet" media="all">
+
+    <!-- Main CSS-->
+    <link href="~/css/main.css" rel="stylesheet" media="all">
+    <style>
+        a {
+            text-decoration: none;
+            color: gray;
+            font-size: 20px;
+            font-family: 'Roboto';
+        }
+    </style>
+</head>
+
+<body>
+    <div class="page-wrapper bg-red p-t-180 p-b-100 font-robo">
+        <div class="wrapper wrapper--w960">
+            <div class="card card-2">
+                <div class="card-heading"></div>
+                <div class="card-body">
+                    <h2 class="title">Đăng ký</h2>
+                    <form asp-action="Register">
+                        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                        <div class="input-group">
+                            <input asp-for="FullName" class="form-control input--style-2" type="text" placeholder="Họ Tên">
+                            <span asp-validation-for="FullName" class="text-danger"></span>
+                        </div>
+                        <div class="row row-space">
+                            <div class="col-2">
+                                <div class="input-group">
+                                    <input asp-for="Ngaysinh" class="form-control input--style-2" />
+                                    @*<i class="zmdi zmdi-calendar-note input-icon js-btn-calendar"></i>*@
+                                    <span asp-validation-for="Ngaysinh" class="text-danger"></span>
+                                </div>
+                            </div>
+                            <div class="input-group">
+                                <input asp-for="PhoneNumber" class="form-control input--style-2" type="text" placeholder="Số điện thoại">
+                                <span asp-validation-for="PhoneNumber" class="text-danger"></span>
+                            </div>
+                        </div>
+                        <div class="input-group">
+                            <input asp-for="Email" class="form-control input--style-2"
+                                   onchange="validateEmail(this.value)"
+                                   type="text" placeholder="Email của bạn">
+                            <span asp-validation-for="Email" class="text-danger"></span>
+                        </div>
+                        <div class="row row-space">
+                            <div class="col-2">
+                                <div class="input-group">
+                                    <input asp-for="Password" class="form-control input--style-2" type="password" placeholder="Mật khẩu">
+                                    <span asp-validation-for="Password" class="text-danger"></span>
+                                </div>
+                            </div>
+                            <div class="input-group">
+                                <input asp-for="ConfirmPassword" class="form-control input--style-2" type="password" placeholder="Mật khẩu xác nhận">
+                                <span asp-validation-for="ConfirmPassword" class="text-danger"></span>
+                            </div>
+                        </div>
+                        <div class="input-group">
+                            <input asp-for="Mota" class="form-control input--style-2" type="text" placeholder="Mô Tả">
+                            <span asp-validation-for="Mota" class="text-danger"></span>
+                        </div>
+                        <div class="form-group">
+                            <input type="submit" value="Create" class="btn btn--radius btn--green" />
+                        </div>
+                        <br />
+                        <div >
+                            <a style="text-decoration:none" href="/Home">Quay về trang chủ</a>
+                        </div>
+                    </form>
+
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Jquery JS-->
+    <script src="~/vendor/jquery/jquery.min.js"></script>
+    <!-- Vendor JS-->
+    <script src="~/vendor/select2/select2.min.js"></script>
+    <script src="~/vendor/datepicker/moment.min.js"></script>
+    <script src="~/vendor/datepicker/daterangepicker.js"></script>
+
+    <!-- Main JS-->
+    <script src="~/js/global.js"></script>
+
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+
+    <script>
+
+        function validateEmail(email) {
+            $.ajax({
+                type: "POST",
+                url: "/Home/ValidateEmail",
+                data: {
+                    email: email,
+                },
+                success: function (result) {
+                    alert("Email bạn nhập đã có người sử dụng");
+                }
+            });
+        }
+    </script>
+
+</body><!-- This templates was made by Colorlib (https://colorlib.com) -->
+
+</html>
+
+
+<!-- end document-->
